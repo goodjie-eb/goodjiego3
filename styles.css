@@ -265,15 +265,7 @@ p {
 }
 
 .timeline::before {
-    content: '';
-    position: absolute;
-    left: 4.5rem;
-    top: 2rem;
-    bottom: -2rem;
-    width: 6px;
-    background-color: var(--retro-green);
-    border-radius: 3px;
-    z-index: -1;
+    display: none;
 }
 
 .timeline-item {

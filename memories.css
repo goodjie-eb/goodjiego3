@@ -1,0 +1,571 @@
+/* ========== Memories Page Styles ========== */
+
+.hero-subtitle {
+    color: var(--retro-yellow);
+    font-size: 1.3rem;
+    font-weight: 900;
+    margin-top: 1rem;
+    letter-spacing: 0.15em;
+    position: relative;
+    z-index: 1;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* ========== Day Tabs ========== */
+.day-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.day-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 1rem 2rem;
+    background: var(--retro-white);
+    border: 5px solid var(--retro-green);
+    border-radius: 16px;
+    cursor: pointer;
+    font-family: var(--font-main);
+    font-weight: 900;
+    box-shadow: 6px 6px 0 var(--retro-blue);
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.day-tab::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 40%, rgba(229, 202, 133, 0.3));
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.day-tab:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0 var(--retro-blue);
+}
+
+.day-tab:hover::before {
+    opacity: 1;
+}
+
+.day-tab.active {
+    background: var(--retro-red);
+    color: var(--retro-white);
+    border-color: var(--retro-red);
+    transform: translate(-2px, -2px) rotate(-2deg);
+    box-shadow: 8px 8px 0 var(--retro-blue);
+}
+
+.tab-icon {
+    font-size: 1.8rem;
+    position: relative;
+    z-index: 1;
+}
+
+.tab-label {
+    font-size: 1.2rem;
+    letter-spacing: 0.1em;
+    position: relative;
+    z-index: 1;
+}
+
+.tab-date {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    position: relative;
+    z-index: 1;
+}
+
+/* ========== Day Panels ========== */
+.day-panel {
+    display: none;
+    animation: panelSlideIn 0.4s ease-out;
+}
+
+.day-panel.active {
+    display: block;
+}
+
+@keyframes panelSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.day-header {
+    margin-bottom: 2rem;
+}
+
+/* ========== Memory Grid ========== */
+.memory-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.memory-zone {
+    background: var(--retro-white);
+    border: 5px solid var(--retro-green);
+    border-radius: 20px;
+    padding: 1.8rem 2rem;
+    box-shadow: 8px 8px 0 var(--retro-blue);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.memory-zone::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80px;
+    height: 80px;
+    background: var(--retro-yellow);
+    opacity: 0.15;
+    border-radius: 0 0 0 100%;
+}
+
+.memory-zone:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 10px 10px 0 var(--retro-blue);
+}
+
+/* ========== Zone Header ========== */
+.zone-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 4px dashed var(--retro-yellow);
+}
+
+.zone-number {
+    background: var(--retro-red);
+    color: var(--retro-white);
+    font-size: 1.3rem;
+    font-weight: 900;
+    width: 2.8rem;
+    height: 2.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 3px 3px 0 var(--retro-blue);
+    border: 3px solid var(--retro-white);
+    outline: 3px solid var(--retro-red);
+}
+
+.zone-title {
+    color: var(--retro-green) !important;
+    font-size: 1.4rem !important;
+    margin-bottom: 0 !important;
+    cursor: text;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    transition: background 0.2s;
+    outline: none;
+    min-width: 100px;
+}
+
+.zone-title:focus {
+    background: var(--retro-yellow);
+    box-shadow: 0 0 0 3px var(--retro-green);
+}
+
+/* ========== Photo Slots (3 per zone) ========== */
+.photo-slots {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+/* ========== Single Photo Slot ========== */
+.photo-slot {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 14px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Empty slot */
+.photo-slot.empty {
+    border: 4px dashed var(--retro-green);
+    background: linear-gradient(135deg, rgba(24, 122, 47, 0.04), rgba(229, 202, 133, 0.08));
+}
+
+.photo-slot.empty:hover {
+    border-color: var(--retro-red);
+    background: linear-gradient(135deg, rgba(217, 43, 47, 0.04), rgba(229, 202, 133, 0.12));
+    transform: scale(1.03);
+}
+
+.photo-slot.drag-over {
+    border-color: var(--retro-red) !important;
+    background: rgba(217, 43, 47, 0.08) !important;
+    transform: scale(1.05);
+    box-shadow: 0 0 0 4px rgba(217, 43, 47, 0.15);
+}
+
+/* Upload label inside empty slot */
+.slot-upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    padding: 1rem;
+}
+
+.file-input {
+    display: none;
+}
+
+.slot-upload-icon {
+    color: var(--retro-green);
+    transition: transform 0.3s, color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.photo-slot.empty:hover .slot-upload-icon {
+    color: var(--retro-red);
+    transform: scale(1.15) rotate(90deg);
+}
+
+.slot-upload-text {
+    font-family: var(--font-main);
+    font-weight: 900;
+    font-size: 0.85rem;
+    color: var(--retro-green);
+    text-align: center;
+    letter-spacing: 0.05em;
+}
+
+.photo-slot.empty:hover .slot-upload-text {
+    color: var(--retro-red);
+}
+
+/* ========== Filled Slot (has photo) ========== */
+.photo-slot.has-photo {
+    border: 4px solid var(--retro-white);
+    box-shadow: 0 0 0 3px var(--retro-green), 5px 5px 0 3px var(--retro-blue);
+    cursor: pointer;
+}
+
+.photo-slot.has-photo:hover {
+    transform: scale(1.04) rotate(1deg);
+    box-shadow: 0 0 0 3px var(--retro-red), 7px 7px 0 3px var(--retro-blue);
+    z-index: 5;
+}
+
+.slot-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: sepia(0.08) contrast(1.05) saturate(1.1);
+    transition: filter 0.3s;
+}
+
+.photo-slot.has-photo:hover .slot-photo {
+    filter: sepia(0) contrast(1.1) saturate(1.2);
+}
+
+/* ========== Overlay with Delete Button ========== */
+.slot-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(26, 26, 26, 0.7) 0%, transparent 50%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 0.6rem;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.photo-slot.has-photo:hover .slot-overlay {
+    opacity: 1;
+}
+
+.slot-delete-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.4rem 0.8rem;
+    background: var(--retro-red);
+    color: var(--retro-white);
+    border: 3px solid var(--retro-white);
+    border-radius: 20px;
+    font-family: var(--font-main);
+    font-weight: 900;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+    line-height: 1;
+}
+
+.slot-delete-btn:hover {
+    background: #ff4444;
+    transform: scale(1.1);
+}
+
+.slot-delete-btn svg {
+    flex-shrink: 0;
+}
+
+/* ========== Animations ========== */
+.photo-slot.uploading {
+    opacity: 0.5;
+    transform: scale(0.95);
+}
+
+.photo-slot.just-uploaded {
+    animation: slotPopIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes slotPopIn {
+    0% { transform: scale(0.7) rotate(-8deg); opacity: 0.3; }
+    60% { transform: scale(1.06) rotate(2deg); }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.photo-slot.removing {
+    animation: slotRemove 0.3s ease forwards;
+}
+
+@keyframes slotRemove {
+    to {
+        transform: scale(0.6) rotate(8deg);
+        opacity: 0;
+    }
+}
+
+/* ========== Photo Counter ========== */
+.photo-counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-top: 3rem;
+    padding: 1.2rem 2.5rem;
+    background: var(--retro-yellow);
+    border: 5px solid var(--retro-green);
+    border-radius: 50px;
+    box-shadow: 6px 6px 0 var(--retro-blue);
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.counter-icon {
+    font-size: 1.8rem;
+    animation: counterBounce 2s ease-in-out infinite;
+}
+
+@keyframes counterBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+.counter-text {
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: var(--retro-green);
+}
+
+.counter-text strong {
+    color: var(--retro-red);
+    font-size: 1.4rem;
+}
+
+/* ========== Backdrop for expanded photo ========== */
+.photo-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(26, 26, 26, 0.85);
+    z-index: 900;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    backdrop-filter: blur(6px);
+}
+
+.photo-backdrop.active {
+    opacity: 1;
+    pointer-events: all;
+    cursor: pointer;
+}
+
+/* ========== Expanded Photo Slot ========== */
+.photo-slot.expanded {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: min(80vw, 80vh) !important;
+    height: min(80vw, 80vh) !important;
+    z-index: 950 !important;
+    border-radius: 18px !important;
+    border: 6px solid var(--retro-white) !important;
+    box-shadow: 0 0 0 5px var(--retro-green), 0 30px 80px rgba(0, 0, 0, 0.6) !important;
+    animation: expandIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: zoom-out;
+}
+
+.photo-slot.expanded .slot-photo {
+    filter: none;
+    border-radius: 12px;
+}
+
+/* Hide delete overlay when expanded */
+.photo-slot.expanded .slot-overlay {
+    opacity: 0 !important;
+    pointer-events: none;
+}
+
+@keyframes expandIn {
+    from {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(0.4);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+    .day-tabs {
+        gap: 0.6rem;
+    }
+
+    .day-tab {
+        padding: 0.8rem 1.2rem;
+        border-width: 4px;
+        box-shadow: 4px 4px 0 var(--retro-blue);
+    }
+
+    .tab-icon {
+        font-size: 1.4rem;
+    }
+
+    .tab-label {
+        font-size: 1rem;
+    }
+
+    .memory-zone {
+        padding: 1.3rem 1.2rem;
+        border-width: 4px;
+        box-shadow: 6px 6px 0 var(--retro-blue);
+        border-radius: 16px;
+    }
+
+    .photo-slots {
+        gap: 0.7rem;
+    }
+
+    .photo-slot.has-photo {
+        border-width: 3px;
+        box-shadow: 0 0 0 2px var(--retro-green), 4px 4px 0 2px var(--retro-blue);
+    }
+
+    .zone-header {
+        gap: 0.7rem;
+    }
+
+    .zone-number {
+        width: 2.3rem;
+        height: 2.3rem;
+        font-size: 1.1rem;
+    }
+
+    .zone-title {
+        font-size: 1.2rem !important;
+    }
+
+    .slot-upload-icon svg {
+        width: 28px;
+        height: 28px;
+    }
+
+    .slot-upload-text {
+        font-size: 0.7rem;
+    }
+
+    .slot-delete-btn {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.6rem;
+    }
+
+    .slot-delete-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    /* Always show overlay on mobile (no hover) */
+    .slot-overlay {
+        opacity: 1;
+        background: linear-gradient(to top, rgba(26, 26, 26, 0.55) 0%, transparent 45%);
+    }
+
+    /* Expanded photo on mobile */
+    .photo-slot.expanded {
+        width: min(90vw, 90vh) !important;
+        height: min(90vw, 90vh) !important;
+        border-width: 4px !important;
+    }
+
+    .photo-counter {
+        padding: 0.8rem 1.5rem;
+        max-width: 260px;
+    }
+
+    .counter-text {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .day-tab {
+        padding: 0.6rem 0.8rem;
+        flex: 1;
+        min-width: 0;
+    }
+
+    .tab-icon { font-size: 1.2rem; }
+    .tab-label { font-size: 0.85rem; }
+    .tab-date { font-size: 0.75rem; }
+
+    .photo-slots {
+        gap: 0.5rem;
+    }
+
+    .slot-upload-text {
+        font-size: 0.6rem;
+    }
+}
