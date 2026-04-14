@@ -276,7 +276,7 @@
             img.loading = 'lazy';
             img.addEventListener('click', (e) => {
                 e.stopPropagation();
-                toggleExpand(slot);
+                toggleSelected(slot);
             });
 
             const overlay = document.createElement('div');
@@ -357,44 +357,34 @@
             document.getElementById('totalPhotos').textContent = total;
         }
 
-        // ========== Expand/Collapse Toggle ==========
-        const backdrop = document.getElementById('photoBackdrop');
-        let currentExpanded = null;
+        // ========== Select/Deselect Toggle (show delete) ==========
+        let currentSelected = null;
 
-        function toggleExpand(slot) {
-            if (slot.classList.contains('expanded')) {
-                collapsePhoto(slot);
+        function toggleSelected(slot) {
+            if (slot.classList.contains('selected')) {
+                deselectPhoto(slot);
             } else {
-                // Collapse any other expanded photo first
-                if (currentExpanded && currentExpanded !== slot) {
-                    collapsePhoto(currentExpanded);
+                // Deselect any other selected photo first
+                if (currentSelected && currentSelected !== slot) {
+                    deselectPhoto(currentSelected);
                 }
-                expandPhoto(slot);
+                selectPhoto(slot);
             }
         }
 
-        function expandPhoto(slot) {
-            slot.classList.add('expanded');
-            backdrop.classList.add('active');
-            currentExpanded = slot;
-            document.body.style.overflow = 'hidden';
+        function selectPhoto(slot) {
+            slot.classList.add('selected');
+            currentSelected = slot;
         }
 
-        function collapsePhoto(slot) {
-            slot.classList.remove('expanded');
-            backdrop.classList.remove('active');
-            currentExpanded = null;
-            document.body.style.overflow = '';
+        function deselectPhoto(slot) {
+            slot.classList.remove('selected');
+            currentSelected = null;
         }
 
-        // Click backdrop to collapse
-        backdrop.addEventListener('click', () => {
-            if (currentExpanded) collapsePhoto(currentExpanded);
-        });
-
-        // Escape key to collapse
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && currentExpanded) collapsePhoto(currentExpanded);
+        // Click anywhere else to deselect
+        document.addEventListener('click', () => {
+            if (currentSelected) deselectPhoto(currentSelected);
         });
 
         // ========== Day Tab Switching ==========
